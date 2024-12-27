@@ -10,8 +10,9 @@
             Recusandae quas, asperiores eveniet vel nostrum magnam voluptatum
             tempore! Consectetur, id commodi!
           </p>
-          <div class="search">
-            <form action={% url 'search'%}
+          <div class="search"> 
+            <form action={% url 'search'%} method="GET">
+              {% comment %}  {% endcomment %}
               <!-- Form Row 1 -->
               <div class="form-row">
                 <div class="col-md-4 mb-3">
@@ -25,12 +26,12 @@
                 </div>
 
                 <div class="col-md-4 mb-3">
-                  <label class="sr-only">street</label>
+                  <label class="sr-only">Title</label>
                   <input
                     type="text"
-                    name="street"
+                    name="title"
                     class="form-control"
-                    placeholder="Street"
+                    placeholder="Title"
                   />
                 </div>
 
@@ -103,9 +104,9 @@
             </div>
             <div class="card-body">
               <div class="listing-heading text-center">
-                <h4 class="text-primary">{{listing.title}}</h4>
+                <h4 class="text-primary">{{listing.title | title}}</h4>
                 <p>
-                  <i class="fas fa-map-marker text-secondary"></i> {{listing.district}}
+                  <i class="fas fa-map-marker text-secondary"></i> {{listing.get_district_display}}
                 </p>
               </div>
               <hr />
