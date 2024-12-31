@@ -20,15 +20,16 @@ def contact(request):
             has_contacted = Contact.objects.all().filter(listing_id=listing_id,user_id = user_id)
             if has_contacted:
                 messages.error(request, "You made an inquiry for this listing!")
-                return redirect('/listing/'+listing_id)
+                return redirect('/listings/'+listing_id)
+            contact = Contact(listing=listing_title, listing_id=listing_id, name=name, email=email, phone=phone,message=message, user_id=user_id)
         contact.save()
         send_mail(
             "Listing Inquiry",
-            "Inquiry for " + listing_title + '. Sign into admin for more info',
+            "Inquiry for" + listing_title + '.Sign into admin for more info',
             'admin@bcre.com',
             [realtor_email, 'admin@bcre.com'],
             fail_silently = False
         )
-        contact = Contact(listing=listing_title, listing_id=listing_id, name=name, email=email, phone=phone,message=message, user_id=user_id)
+        
         message.success(request,"your request submitted, realtor will get back to you soon")
-        return redirect('/listing/'+listing_id)
+    return redirect('/listings/'+listing_id)
